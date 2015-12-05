@@ -20,18 +20,18 @@ def dump(url, file_name):
 # main url for 'the achive' page
 url = 'http://pastebin.com/archive'
 
-# infinite loop 
+# infinite loop
 while True:
     r = requests.get(url).content
-    u = cutf(None, r)[1]  
-    h = edit_links(u, url)  
-    s = bs(h)
-    for i in s.find_all('table', class_=re.compile('(?i)^maintable$')):  
-        for j in i.find_all('a', href=re.compile('.*')):  
-            link = '%s' % j.get('href')  
-            if len(re.findall('(?i)archive', link)) > 0: continue  
-            file_name = '%s.txt' % re.sub('.+/', '', link)  
-            if os.path.isfile(file_name): continue  
-            raw_link = 'http://pastebin.com/raw.php?i=%s' % re.sub('.+/', '', link)  
-            dump(raw_link, file_name)  
+    u = cutf(None, r)[1]
+    h = edit_links(u, url)
+    s = bs(h, "lxml")
+    for i in s.find_all('table', class_=re.compile('(?i)^maintable$')):
+        for j in i.find_all('a', href=re.compile('.*')):
+            link = '%s' % j.get('href')
+            if len(re.findall('(?i)archive', link)) > 0: continue
+            file_name = '%s.txt' % re.sub('.+/', '', link)
+            if os.path.isfile(file_name): continue
+            raw_link = 'http://pastebin.com/raw.php?i=%s' % re.sub('.+/', '', link)
+            dump(raw_link, file_name)
     time.sleep(1)
