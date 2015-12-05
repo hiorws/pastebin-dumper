@@ -17,7 +17,7 @@ def dump(url, file_name):
     query = requests.get(url).content
     open(file_name, 'wb').write(query)
 
-# main url for 'the achive' page
+# main url for 'the archive' page
 url = 'http://pastebin.com/archive'
 
 # infinite loop
