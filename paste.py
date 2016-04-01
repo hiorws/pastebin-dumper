@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import requests, re, time
 from bs4 import BeautifulSoup as bs
 from w3lib.encoding import html_to_unicode as cutf
