@@ -33,19 +33,21 @@ def edit_links(html_source, home_url):
 
 def dump(url, file_name):
     query = requests.get(url).content
-    open(file_name, 'wb').write(query)
+    open("dumps/" + file_name, 'wb').write(query)
 
 # main url for 'the archive' page
 url = 'http://pastebin.com/archive'
 
 def main(percent_by_user=None):
     # infinite loop
+    if not os.path.exists("dumps"):
+        os.makedirs("dumps")
     while True and freespace_higher_than(percent_by_user):
         # total, used, free = check_disk_usage()
         # print("Total: " + total)
         # print("Used: " + used)
         # print("Free: " + free)
-
+        print "Tries to dump"
         r = requests.get(url).content
         u = cutf(None, r)[1]
         h = edit_links(u, url)
